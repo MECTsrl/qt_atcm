@@ -845,7 +845,10 @@ bool trend::printGraph()
     
     if (dk->exec() == QDialog::Accepted && strlen(value) != 0)
     {
-        sprintf(fullfilename, "%s/%s/%s.png", SCREENSHOT_DIR, _actual_trend_, value);
+        QString newValue = QString(value);
+        newValue.replace(' ','_');
+
+        sprintf(fullfilename, "%s/%s/%s.png", SCREENSHOT_DIR, _actual_trend_, newValue.toAscii().data());
         if (QDir().exists(QString("%1/%2").arg(SCREENSHOT_DIR).arg(_actual_trend_)) == false)
         {
             QDir().mkdir(QString("%1/%2").arg(SCREENSHOT_DIR).arg(_actual_trend_));

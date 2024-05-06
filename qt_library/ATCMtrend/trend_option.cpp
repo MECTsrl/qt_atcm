@@ -486,7 +486,9 @@ void trend_option::on_pushButtonSaveAs_clicked()
     if (dk->exec() == QDialog::Accepted && strlen(value) != 0)
     {
         LOG_PRINT(verbose_e, "Saving to '%s'\n", value);
-        sprintf(fullfilename, "%s/%s.csv", CUSTOM_TREND_DIR, value);
+        QString newValue = QString(value);
+        newValue.replace(' ','_');
+        sprintf(fullfilename, "%s/%s.csv", CUSTOM_TREND_DIR, newValue.toAscii().data());
         Save(fullfilename);
         strcpy(_actual_trend_, value);
         LoadTrend(_actual_trend_, NULL);
